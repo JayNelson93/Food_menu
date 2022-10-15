@@ -6,7 +6,7 @@ Created on Thu Oct 13 16:36:41 2022
 """
 import streamlit as st
 import pandas as pd
-import joblib
+import pickle
 
 
 
@@ -20,7 +20,7 @@ def predict(data1,data2):
     for a, b in zip(num_cat,cat):
         d[a] = b
 
-    model = joblib.load(open("model.pkl",'rb'))
+    model = pickle.load(open("model.pkl",'rb'))
     predict = model.predict([[data1,data2]])
     
     return d[predict[0]]
