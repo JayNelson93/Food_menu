@@ -25,7 +25,18 @@ def predict(data1,data2):
     
     return d[predict[0]]
 
+def get_mood():
+    dic = {'Select an option':0,'Fatigued':1,'Sleepy':2,'Hungry':3,'Angry':4,'Lonely':5,'Sad':6,'Happy':7,'Bored':8,\
+      'Overweight':9,'Underweight':9,'High Glucose':11,'Headache':12}
+    feel = []
+    for i in dic.keys():
+        feel.append(i)
+    return feel,dic
 
+def process_mood(mood):
+    
+    _,di=get_mood()
+    return di[mood]
 
 # front end elements of the web page 
 html_temp = """ 
@@ -84,15 +95,16 @@ with col[0]:
         st.markdown("<h5 style= 'color: black;'>How old are you? </h5>", unsafe_allow_html=True)
         age = st.number_input("Enter your age here ",min_value=0,max_value=100,step=1)
 with col[1]:
-        st.markdown("<h5 style= 'color: black;'>Rate your mood by number 🙁 < 😃 </h5>", unsafe_allow_html=True)
-        mood = st.number_input("Enter the number here ",min_value=0,step=1)
+        st.markdown("<h5 style= 'color: black;'>How are you feeling today ?</h5>", unsafe_allow_html=True)
+        inp =st.selectbox("How are you feeling today?", mood_list)
+        mood = process_mood(inp)
 
 button = st.button("Submit")
 
 if(button):
     if(age>0 and mood>0):
         msg1= predict(age,mood)
-        st.markdown(f'<p style="color:#E3984C;font-weight: bold;font-size:18px;">We Recommend You: {msg1}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="color:black;font-weight: bold;font-size:18px;">Here’s what we suggest: {msg1}</p>', unsafe_allow_html=True)
     else:
         msg2='Required Data are missing, Please key in all the data.'
         st.markdown(f'<p style="color:red;font-weight: bold;font-size:18px; border-radius:2%;">{msg2}</p>', unsafe_allow_html=True)
