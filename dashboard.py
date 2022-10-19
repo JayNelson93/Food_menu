@@ -96,6 +96,7 @@ with col[0]:
         age = st.number_input("Enter your age here ",min_value=0,max_value=100,step=1)
 with col[1]:
         st.markdown("<h5 style= 'color: black;'>How are you feeling today ?</h5>", unsafe_allow_html=True)
+        mood_list,_=get_mood()
         inp =st.selectbox("How are you feeling today?", mood_list)
         mood = process_mood(inp)
 
