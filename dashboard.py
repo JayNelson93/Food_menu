@@ -97,7 +97,7 @@ with col[0]:
 with col[1]:
         st.markdown("<h5 style= 'color: black;'>How are you feeling today ?</h5>", unsafe_allow_html=True)
         mood_list,_=get_mood()
-        inp =st.selectbox("How are you feeling today?", mood_list)
+        inp =st.selectbox("Enter here... ", mood_list)
         mood = process_mood(inp)
 
 button = st.button("Submit")
